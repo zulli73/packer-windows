@@ -73,7 +73,6 @@
       "boot_command": "",
       "boot_wait": "6m",
       "communicator": "winrm",
-      "cpus": 2,
       "disk_size": "{{user `disk_size`}}",
       "floppy_files": [
         "{{user `autounattend`}}",
@@ -92,7 +91,10 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_url": "{{user `iso_url`}}",
-      "memory": 2048,
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--memory", "4096"],
+        ["modifyvm", "{{.Name}}", "--cpus", "4"]
+      ],
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
       "type": "virtualbox-iso",
       "vm_name": "windows_10",
